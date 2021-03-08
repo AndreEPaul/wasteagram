@@ -48,8 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemBuilder: (context, index) {
                   var post = snapshot.data.docs[index];
                   return ListTile(
-                      leading: Text(post['weight'].toString()),
-                      title: Text('Post Title'));
+                      leading: Text(post['quantity'].toString()),
+                      title: Text(post['date'].toString()));
                 });
           }),
     );
