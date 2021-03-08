@@ -44,9 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
             if (!snapshot.hasData)
               return Center(child: CircularProgressIndicator());
             return ListView.builder(
-                itemCount: snapshot.data.documents.length,
+                itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
-                  var post = snapshot.data.documents[index];
+                  var post = snapshot.data.docs[index];
                   return ListTile(
                       leading: Text(post['weight'].toString()),
                       title: Text('Post Title'));
