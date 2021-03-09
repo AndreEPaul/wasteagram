@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
+import 'package:wasteagram/models/food_waste_post.dart';
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -26,11 +28,11 @@ class _MyHomePageState extends State<MyHomePage> {
             return ListView.builder(
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
-                  var post = snapshot.data.docs[index];
-                  DateTime timestamp = post['date'].toDate();
-                  var formattedDate = DateFormat.yMMMd().add_jm().format(timestamp);
+                  FoodWastePost post = FoodWastePost(snapshot, index);
+                  var formattedDate =
+                      DateFormat.yMMMd().add_jm().format(post.date);
                   return ListTile(
-                      leading: Text(post['quantity'].toString()),
+                      leading: Text(post.quantity.toString()),
                       title: Text(formattedDate.toString()));
                 });
           }),
