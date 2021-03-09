@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: MyHomePage(title: 'Wasteagram'),
+      home: MyHomePage(),
     );
   }
 }

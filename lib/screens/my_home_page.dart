@@ -5,26 +5,27 @@ import 'package:intl/intl.dart';
 import 'package:wasteagram/models/food_waste_post.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int numberOfPosts = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Wasteagram - $numberOfPosts"),
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance.collection('posts').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return Center(child: CircularProgressIndicator());
+            this.numberOfPosts = snapshot.data.docs.length;
             return ListView.builder(
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
