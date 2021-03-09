@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -26,9 +27,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   var post = snapshot.data.docs[index];
+                  DateTime timestamp = post['date'].toDate();
+                  var formattedDate = DateFormat.yMMMd().add_jm().format(timestamp);
                   return ListTile(
                       leading: Text(post['quantity'].toString()),
-                      title: Text((post['date'].toDate()).toString()));
+                      title: Text(formattedDate.toString()));
                 });
           }),
     );
