@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   var post = snapshot.data.docs[index];
                   return ListTile(
                       leading: Text(post['quantity'].toString()),
-                      title: Text(post['date'].toString()));
+                      title: Text((post['date'].toDate()).toString()));
                 });
           }),
     );
