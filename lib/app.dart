@@ -6,9 +6,9 @@ import 'package:wasteagram/screens/detail_screen.dart';
 
 class MyApp extends StatelessWidget {
   static final routes = {
-    '/': (context) => MyHomePage(),
-    'new_post': (context) => NewPost(),
-    'detail_screen': (context) => DetailScreen(),
+    MyHomePage.routeName: (context) => MyHomePage(),
+    NewPost.routeName: (context) => NewPost(),
+    DetailScreen.routeName: (context) => DetailScreen(),
   };
 
   @override

@@ -7,6 +7,8 @@ import 'package:wasteagram/models/food_waste_post.dart';
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
 
+  static const routeName = '/';
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
