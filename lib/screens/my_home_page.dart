@@ -15,24 +15,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int numberOfPosts = 0;
+  int sumOfWastes = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Wasteagram - $numberOfPosts"),
+        title: Text("Wasteagram - $sumOfWastes"),
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance.collection('posts').snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return Center(child: CircularProgressIndicator());
-            this.numberOfPosts = snapshot.data.docs.length;
             return ListView.builder(
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {
                   FoodWastePost post = FoodWastePost(snapshot, index);
+                  this.sumOfWastes += post.quantity;
                   var formattedDate =
                       DateFormat.yMMMd().add_jm().format(post.date);
                   return ListTile(
