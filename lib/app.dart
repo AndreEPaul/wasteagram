@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
       ),
       routes: routes,
-      home: MyHomePage(),
     );
   }
 }

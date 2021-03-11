@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 import 'package:wasteagram/models/food_waste_post.dart';
+import 'package:wasteagram/screens/detail_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -35,8 +36,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   var formattedDate =
                       DateFormat.yMMMd().add_jm().format(post.date);
                   return ListTile(
-                      leading: Text(post.quantity.toString()),
-                      title: Text(formattedDate.toString()));
+                    leading: Text(post.quantity.toString()),
+                    title: Text(formattedDate.toString()),
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(DetailScreen.routeName, arguments: post);
+                    },
+                  );
                 });
           }),
     );
