@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import 'package:wasteagram/models/food_waste_post.dart';
 import 'package:wasteagram/screens/detail_screen.dart';
+import 'package:wasteagram/screens/new_post.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -45,6 +46,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 });
           }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(NewPost.routeName);
+        },
+      ),
     );
   }
 }

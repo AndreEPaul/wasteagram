@@ -26,6 +26,7 @@ dependencies:
   firebase_core:
   intl:
   location:
+  image_picker:
   flutter:
     sdk: flutter
 
