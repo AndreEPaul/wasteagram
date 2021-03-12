@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,6 +12,8 @@ class NewPost extends StatefulWidget {
 }
 
 class _NewPostState extends State<NewPost> {
+  final formKey = GlobalKey<FormState>();
+  int quantity;
   File image;
   final picker = ImagePicker();
   void getImage() async {
@@ -41,9 +45,45 @@ class _NewPostState extends State<NewPost> {
               SizedBox(
                 height: 40,
               ),
+              Expanded(
+                  child: Form(
+                      key: formKey,
+                      child: TextFormField(
+                        decoration: InputDecoration(labelText: 'Quantity'),
+                        onSaved: (value) {
+                          quantity = int.parse(value);
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Enter quantity.';
+                          }
+                          return null;
+                        },
+                      ))),
               ElevatedButton(
                 child: Text('Post!'),
-                onPressed: () {},
+                onPressed: () async {
+                  if (formKey.currentState.validate()) {
+                    FirebaseStorage storage = FirebaseStorage.instance;
+                    Reference ref = storage
+                        .ref()
+                        .child("image" + DateTime.now().toString());
+                    UploadTask uploadTask = ref.putFile(image);
+                    String url;
+                    uploadTask.then((res) {
+                      res.ref.getDownloadURL();
+                    });
+                    url = await ref.getDownloadURL();
+                    FirebaseFirestore.instance.collection('posts').add({
+                      'date': Timestamp.fromDate(DateTime.now()),
+                      'imageURL': url,
+                      'latitude': 45.1,
+                      'longitude': -122.1,
+                      'quantity': 12
+                    });
+                    Navigator.of(context).pop();
+                  }
+                },
               )
             ],
           ));
