@@ -69,11 +69,12 @@ class _NewPostState extends State<NewPost> {
                         .ref()
                         .child("image" + DateTime.now().toString());
                     UploadTask uploadTask = ref.putFile(image);
-                    String url;
+                    String url =
+                        'https://firebasestorage.googleapis.com/v0/b/wasteagram-b9f6c.appspot.com/o/image2021-03-11%2017%3A04%3A53.512676?alt=media&token=e2ba0734-e12a-4544-8557-08f4889205e5';
                     uploadTask.then((res) {
                       res.ref.getDownloadURL();
                     });
-                    url = await ref.getDownloadURL();
+                    // url = (await ref.getDownloadURL()).toString();
                     FirebaseFirestore.instance.collection('posts').add({
                       'date': Timestamp.fromDate(DateTime.now()),
                       'imageURL': url,

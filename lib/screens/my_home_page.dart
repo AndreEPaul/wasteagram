@@ -25,10 +25,14 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("Wasteagram - $sumOfWastes"),
       ),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('posts').snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('posts')
+              .orderBy('date', descending: true)
+              .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
               return Center(child: CircularProgressIndicator());
+            this.sumOfWastes = 0;
             return ListView.builder(
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, index) {

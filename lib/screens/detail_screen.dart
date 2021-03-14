@@ -14,7 +14,7 @@ class DetailScreen extends StatelessWidget {
         body: Column(
           children: [
             Text(formattedDate.toString()),
-            Placeholder(),
+            Image.network(post.imageURL),
             Text(post.quantity.toString()),
           ],
         ));
